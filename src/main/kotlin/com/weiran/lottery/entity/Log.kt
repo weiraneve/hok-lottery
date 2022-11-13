@@ -13,10 +13,7 @@ class Log {
     @Column(name = "team_id")
     var teamId: Int? = null
 
-    @Column(name = "pick_group_one")
-    var pickGroupOne: String = ""
-
-    @Column(name = "pick_group_two")
-    var pickGroupTwo: String = ""
+    @Column(name = "pick_group")
+    var pickGroup: String = ""
 
 }

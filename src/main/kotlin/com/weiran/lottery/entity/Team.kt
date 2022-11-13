@@ -13,6 +13,9 @@ class Team {
     @Column(name = "encrypt_code")
     var encryptCode: String = ""
 
-    @Column(name = "pick_count")
-    var pickCount: Int = 0
+    @Column(name = "pick_content")
+    var pickContent: String = ""
+
+    @Column(name = "pick_content")
+    var isPick: Boolean = false
 }

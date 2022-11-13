@@ -5,6 +5,15 @@ server:
 spring:
   application:
     name: lottery
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lottery
+    username:
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
 
 #logging:
 #  # 日志文件地址
