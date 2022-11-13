@@ -1,5 +1,6 @@
 package com.weiran.lottery.entity
 
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -15,5 +16,8 @@ class Log {
 
     @Column(name = "pick_group")
     var pickGroup: String = ""
+
+    @Column(name = "time")
+    lateinit var time: Date
 
 }

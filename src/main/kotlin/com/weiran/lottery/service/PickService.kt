@@ -8,6 +8,8 @@ import com.weiran.lottery.mapper.TeamRepository
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +39,12 @@ class PickService {
 
     private fun saveResultForLog(teamId: Int?, pickResult: String) {
         val log = Log()
+        val date = Date()
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd kk:mm:ss")
+        simpleDateFormat.format(date)
         log.teamId = teamId
         log.pickGroup = pickResult
+        log.time = date
         logRepository.save(log)
     }
 
