@@ -5,14 +5,21 @@ import com.weiran.lottery.entity.Log
 import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.LogRepository
 import com.weiran.lottery.mapper.TeamRepository
+import lombok.RequiredArgsConstructor
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class PickService(
-    val heroRepository: HeroRepository,
-    val logRepository: LogRepository,
-    val teamRepository: TeamRepository
-) {
+@RequiredArgsConstructor
+class PickService {
+
+    @Autowired
+    private lateinit var heroRepository: HeroRepository
+    @Autowired
+    private lateinit var logRepository: LogRepository
+    @Autowired
+    private lateinit var teamRepository: TeamRepository
+
     fun pick(encryptCode: String): MyResult {
         val team = teamRepository.findByEncryptCode(encryptCode)
         val myResult = MyResult()

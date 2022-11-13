@@ -1,14 +1,11 @@
 package com.weiran.lottery.mapper
 
 import com.weiran.lottery.entity.Hero
-import org.springframework.data.repository.Repository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-interface HeroRepository : Repository<Hero, Int> {
-
-    fun save(hero: Hero)
-
-    fun findHeroById(id: Int): Hero
-
+@Repository
+interface HeroRepository : JpaRepository<Hero, Int> {
     fun findHeroesByLine(line: Int): List<Hero>
 
 }

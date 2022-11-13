@@ -1,8 +1,9 @@
 package com.weiran.lottery.mapper
 
 import com.weiran.lottery.entity.Log
-import org.springframework.data.repository.Repository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-interface LogRepository : Repository<Log, Int> {
-    fun save(log : Log)
+@Repository
+interface LogRepository : JpaRepository<Log, Int> {
 }
