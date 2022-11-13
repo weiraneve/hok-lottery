@@ -51,8 +51,12 @@ class PickService {
     private fun heroPick(): String {
         var heroGroupName = ""
         (1..5).shuffled().take(2).forEach {
-            val heroes = heroRepository.findHeroesByLine(it)
-            heroGroupName += "[" + heroes.shuffled().take(1)[0].name + "]"
+            val heroes = heroRepository.getHeroesByRule(it)
+            heroes.shuffled().take(1).forEach { hero ->
+                heroGroupName += "[" + hero.name + "]"
+                hero.isPick = true
+                heroRepository.save(hero)
+            }
         }
         return heroGroupName
     }
