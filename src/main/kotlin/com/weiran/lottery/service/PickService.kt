@@ -26,7 +26,8 @@ class PickService {
         if (team.isPicked) {
             myResult.data = team.pickContent
         } else {
-            val pickResult = heroPick()
+            var pickResult = heroPick()
+            pickResult += "+" + heroPick()
             myResult.data = pickResult
             saveResultForLog(team.id, pickResult)
         }
@@ -45,7 +46,6 @@ class PickService {
         var heroGroupName = ""
         (1..5).shuffled().take(2).forEach {
             val heroes = heroRepository.findHeroesByLine(it)
-            // todo
             heroGroupName += "[" + heroes.shuffled().take(1)[0].name + "]"
         }
         return heroGroupName
