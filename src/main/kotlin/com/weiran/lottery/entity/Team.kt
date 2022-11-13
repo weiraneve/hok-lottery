@@ -16,6 +16,6 @@ class Team {
     @Column(name = "pick_content")
     var pickContent: String = ""
 
-    @Column(name = "pick_content")
-    var isPick: Boolean = false
+    @Column(name = "is_picked")
+    var isPicked: Boolean = false
 }

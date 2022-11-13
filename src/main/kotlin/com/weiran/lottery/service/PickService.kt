@@ -16,7 +16,7 @@ class PickService(
     fun pick(encryptCode: String): MyResult {
         val team = teamRepository.findByEncryptCode(encryptCode)
         val myResult = MyResult()
-        if (team.isPick) {
+        if (team.isPicked) {
             myResult.data = team.pickContent
         } else {
             val pickResult = heroPick()
