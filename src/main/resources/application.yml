@@ -1,0 +1,11 @@
+# 端口
+server:
+  port: 8034
+
+spring:
+  application:
+    name: lottery
+
+logging:
+  # 日志文件地址
+  config: classpath:logback.xml
