@@ -6,6 +6,6 @@ spring:
   application:
     name: lottery
 
-logging:
-  # 日志文件地址
-  config: classpath:logback.xml
+#logging:
+#  # 日志文件地址
+#  config: classpath:logback.xml
