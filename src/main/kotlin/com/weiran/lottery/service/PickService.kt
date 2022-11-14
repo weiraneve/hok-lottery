@@ -2,6 +2,7 @@ package com.weiran.lottery.service
 
 import com.weiran.lottery.common.MyResult
 import com.weiran.lottery.entity.Log
+import com.weiran.lottery.entity.Team
 import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.LogRepository
 import com.weiran.lottery.mapper.TeamRepository
@@ -32,9 +33,15 @@ class PickService {
             pickResult += "+" + heroPick()
             myResult.data = pickResult
             saveResultForLog(team.id, pickResult)
+            updateTeamIsPicked(team)
         }
 
         return myResult
+    }
+
+    private fun updateTeamIsPicked(team: Team) {
+        team.isPicked = true
+        teamRepository.save(team)
     }
 
     private fun saveResultForLog(teamId: Int?, pickResult: String) {
