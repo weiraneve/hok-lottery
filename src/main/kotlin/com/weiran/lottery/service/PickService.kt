@@ -34,7 +34,10 @@ class PickService {
             saveResultForLog(team.id, pickResult)
             updateTeamIsPicked(team, pickResult)
         }
-        myResult.time = team.updateTime
+        myResult.apply {
+            teamId = team.id
+            time = team.updateTime
+        }
 
         return myResult
     }
