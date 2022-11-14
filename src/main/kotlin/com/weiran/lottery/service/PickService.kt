@@ -33,14 +33,15 @@ class PickService {
             pickResult += "+" + heroPick()
             myResult.data = pickResult
             saveResultForLog(team.id, pickResult)
-            updateTeamIsPicked(team)
+            updateTeamIsPicked(team, pickResult)
         }
 
         return myResult
     }
 
-    private fun updateTeamIsPicked(team: Team) {
+    private fun updateTeamIsPicked(team: Team, pickResult: String) {
         team.isPicked = true
+        team.pickContent = pickResult
         teamRepository.save(team)
     }
 
