@@ -9,7 +9,6 @@ import com.weiran.lottery.mapper.TeamRepository
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.text.SimpleDateFormat
 import java.util.*
 
 @Service
@@ -30,29 +29,33 @@ class PickService {
             myResult.data = team.pickContent
         } else {
             var pickResult = heroPick()
-            pickResult += "+" + heroPick()
+            pickResult += "or" + heroPick()
             myResult.data = pickResult
             saveResultForLog(team.id, pickResult)
             updateTeamIsPicked(team, pickResult)
         }
+        myResult.time = team.updateTime
 
         return myResult
     }
 
     private fun updateTeamIsPicked(team: Team, pickResult: String) {
-        team.isPicked = true
-        team.pickContent = pickResult
+        team.apply {
+            isPicked = true
+            pickContent = pickResult
+            updateTime = Date()
+        }
         teamRepository.save(team)
     }
 
-    private fun saveResultForLog(teamId: Int?, pickResult: String) {
+    private fun saveResultForLog(team_id: Int?, pickResult: String) {
         val log = Log()
         val date = Date()
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd kk:mm:ss")
-        simpleDateFormat.format(date)
-        log.teamId = teamId
-        log.pickGroup = pickResult
-        log.time = date
+        log.apply {
+            teamId = team_id
+            pickGroup = pickResult
+            time = date
+        }
         logRepository.save(log)
     }
 

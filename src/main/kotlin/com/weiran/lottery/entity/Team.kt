@@ -1,5 +1,6 @@
 package com.weiran.lottery.entity
 
+import java.util.Date
 import javax.persistence.*
 
 @Entity
@@ -18,4 +19,7 @@ class Team {
 
     @Column(name = "is_picked")
     var isPicked: Boolean = false
+
+    @Column(name = "update_Time")
+    lateinit var updateTime: Date
 }
