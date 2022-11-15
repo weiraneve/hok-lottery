@@ -25,18 +25,20 @@ class PickService {
     fun pick(encryptCode: String): MyResult {
         val team = teamRepository.findByEncryptCode(encryptCode)
         val myResult = MyResult()
-        if (team.isPicked) {
-            myResult.data = team.pickContent
-        } else {
-            var pickResult = heroPick()
-            pickResult += "or" + heroPick()
-            myResult.data = pickResult
-            saveResultForLog(team.id, pickResult)
-            updateTeamIsPicked(team, pickResult)
+        if (team != null) {
+            if (team.isPicked) {
+                myResult.data = team.pickContent
+            } else {
+                var pickResult = heroPick()
+                pickResult += "or" + heroPick()
+                myResult.data = pickResult
+                saveResultForLog(team.id, pickResult)
+                updateTeamIsPicked(team, pickResult)
+            }
         }
         myResult.apply {
-            teamId = team.id
-            time = team.updateTime
+            teamId = team?.id
+            time = team?.updateTime ?: Date()
         }
 
         return myResult

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TeamRepository : JpaRepository<Team, Int> {
 
-    fun findByEncryptCode(encryptCode: String): Team
+    fun findByEncryptCode(encryptCode: String): Team?
 }
