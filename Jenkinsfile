@@ -11,7 +11,7 @@ pipeline
       stage('Deploy')
     {
       steps {
-         sh"/root/env/javaS"
+         sh" JENKINS_NODE_COOKIE=dontKillMe nohup java -jar /root/.jenkins/workspace/lottery/build/libs/lottery-1.0.1.jar & "
       }
     }
   }
