@@ -14,12 +14,12 @@ class PickController {
     @Autowired
     private lateinit var pickService: PickService
 
-    @GetMapping
+    @GetMapping(produces = ["application/json; charset=utf-8"])
     fun getToPickHeroes(@RequestParam(value = "code") encryptCode: String): MyResult {
         return pickService.pick(encryptCode)
     }
 
-    @PostMapping
+    @PostMapping(produces = ["application/json; charset=utf-8"])
     fun postToPickHeroes(encryptCode: String): MyResult {
         return pickService.pick(encryptCode)
     }
