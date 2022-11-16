@@ -1,6 +1,7 @@
 package com.weiran.lottery.service
 
 import com.weiran.lottery.common.MyResult
+import com.weiran.lottery.common.PostParam
 import com.weiran.lottery.entity.Log
 import com.weiran.lottery.entity.Team
 import com.weiran.lottery.mapper.HeroRepository
@@ -22,8 +23,8 @@ class PickService {
     @Autowired
     private lateinit var teamRepository: TeamRepository
 
-    fun pick(encryptCode: String): MyResult {
-        val team = teamRepository.findByEncryptCode(encryptCode)
+    fun pick(param: PostParam): MyResult {
+        val team = teamRepository.findByEncryptCode(param.encryptCode)
         val myResult = MyResult()
         if (team != null) {
             if (team.isPicked) {
