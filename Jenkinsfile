@@ -11,7 +11,8 @@ pipeline
       stage('Deploy')
     {
       steps {
-         sh"nohup java -jar /root/.jenkins/workspace/lottery/build/libs/lottery-1.0.1.jar &"
+         sh"nohup java -jar /root/.jenkins/workspace/lottery/build/libs/lottery-1.0.1.jar & "
+         sh"exit"
       }
     }
   }
