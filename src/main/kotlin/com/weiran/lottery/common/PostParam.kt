@@ -1,5 +1,5 @@
 package com.weiran.lottery.common
 
 data class PostParam(
-    var encryptCode: String,
+    var encryptCode: String?,
 )

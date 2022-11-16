@@ -24,7 +24,7 @@ class PickService {
     private lateinit var teamRepository: TeamRepository
 
     fun pick(param: PostParam): MyResult {
-        val team = teamRepository.findByEncryptCode(param.encryptCode)
+        val team = param.encryptCode?.let { teamRepository.findByEncryptCode(it) }
         val myResult = MyResult()
         if (team != null) {
             if (team.isPicked) {
