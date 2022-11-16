@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    val kotlinVersion = "1.7.10"
+    val kotlinPluginsVersion = "1.6.21"
     id("org.springframework.boot") version "2.7.4"
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
-    id("org.jetbrains.kotlin.jvm") version kotlinVersion
-    id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion
+    kotlin("jvm") version kotlinPluginsVersion
+    kotlin("plugin.spring") version kotlinPluginsVersion
 }
 
 group = "com.weiran"
