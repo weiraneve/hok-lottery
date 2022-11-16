@@ -11,7 +11,7 @@ pipeline
       stage('Deploy')
     {
       steps {
-         sh /root/env/javaS
+         sh"/root/env/javaS"
       }
     }
   }
