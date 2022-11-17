@@ -1,3 +1,3 @@
 
-rootProject.name = "lottery"
+rootProject.name = "hok-lottery"
 

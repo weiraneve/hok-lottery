@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: lottery
+    name: hok-lottery
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lottery?useSSL=false&serverTimezone=Asia/Shanghai
