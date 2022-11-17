@@ -20,6 +20,6 @@ class Team {
     @Column(name = "is_picked")
     var isPicked: Boolean = false
 
-    @Column(name = "update_Time")
+    @Column(name = "update_time")
     lateinit var updateTime: Date
 }
