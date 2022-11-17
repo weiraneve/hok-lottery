@@ -11,7 +11,8 @@ pipeline
       stage('Deploy')
     {
       steps {
-         sh" JENKINS_NODE_COOKIE=dontKillMe nohup java -jar /root/.jenkins/workspace/lottery/build/libs/lottery-1.0.2.jar & "
+         sh" kill -9 $(lsof -i:8034) "
+         sh" JENKINS_NODE_COOKIE=dontKillMe nohup java -jar /root/.jenkins/workspace/lottery/build/libs/lottery-1.0.3.jar & "
       }
     }
   }
