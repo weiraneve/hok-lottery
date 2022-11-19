@@ -1,5 +1,6 @@
 package com.weiran.lottery.service
 
+import com.weiran.lottery.common.LogResponse
 import com.weiran.lottery.common.MyResult
 import com.weiran.lottery.common.PostParam
 import com.weiran.lottery.entity.Log
@@ -16,31 +17,50 @@ class PickService {
 
     @Autowired
     private lateinit var heroRepository: HeroRepository
+
     @Autowired
     private lateinit var logRepository: LogRepository
+
     @Autowired
     private lateinit var teamRepository: TeamRepository
 
     fun pick(param: PostParam): MyResult {
         val team = param.encryptCode?.let { teamRepository.findByEncryptCode(it) }
-        val myResult = MyResult()
+        val result = MyResult()
+        val logResponseList = arrayListOf<LogResponse>()
         if (team != null) {
             if (team.isPicked) {
-                myResult.data = team.pickContent
+                result.data = team.pickContent
             } else {
                 var pickResult = heroPick()
                 pickResult += "or" + heroPick()
-                myResult.data = pickResult
+                result.data = pickResult
                 saveResultForLog(team.id, pickResult)
                 updateTeamIsPicked(team, pickResult)
             }
-        }
-        myResult.apply {
-            teamId = team?.id
-            time = team?.updateTime ?: Date()
+            team.id?.let {
+                val logs = logRepository.findByTeamId(it)
+                if (logs != null) {
+                    for (log in logs) {
+                        val logResponse = LogResponse()
+                        logResponse.apply {
+                            teamId = log.teamId
+                            pickGroup = log.pickGroup
+                            time = log.time
+                        }
+                        logResponseList.add(logResponse)
+                    }
+                }
+            }
         }
 
-        return myResult
+        result.apply {
+            teamId = team?.id
+            time = team?.updateTime ?: Date()
+            logs = logResponseList
+        }
+
+        return result
     }
 
     private fun updateTeamIsPicked(team: Team, pickResult: String) {

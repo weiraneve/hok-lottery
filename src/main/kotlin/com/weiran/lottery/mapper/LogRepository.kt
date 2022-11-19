@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface LogRepository : JpaRepository<Log, Int> {
+
+    fun findByTeamId(teamId: Int): List<Log>?
+
 }
