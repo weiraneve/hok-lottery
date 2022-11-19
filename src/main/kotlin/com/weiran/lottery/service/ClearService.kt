@@ -18,7 +18,7 @@ class ClearService {
     fun clearOne(teamId: Int): MyResult {
         val result = MyResult()
         if (teamRepository.findById(teamId).isEmpty) {
-            result.data = "未有查询到此队伍"
+            result.data = NOT_FOUND_TEAM
         } else {
             teamRepository.clearOneTeam(teamId)
             result.data = "清除队伍${teamId}成功"
@@ -31,8 +31,13 @@ class ClearService {
         val result = MyResult()
         teamRepository.clearAllTeam()
         heroRepository.clearAllHero()
-        result.data = "清除全部队伍成功"
+        result.data = CLEAR_ALL_TEAM_SUCCESS
         return result
+    }
+
+    companion object {
+        private const val NOT_FOUND_TEAM = "未有查询到此队伍"
+        private const val CLEAR_ALL_TEAM_SUCCESS = "清除全部队伍成功"
     }
 
 }
