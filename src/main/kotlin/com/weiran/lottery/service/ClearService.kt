@@ -1,6 +1,7 @@
 package com.weiran.lottery.service
 
 import com.weiran.lottery.common.MyResult
+import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.TeamRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -10,6 +11,9 @@ class ClearService {
 
     @Autowired
     private lateinit var teamRepository: TeamRepository
+
+    @Autowired
+    private lateinit var heroRepository: HeroRepository
 
     fun clearOne(teamId: Int): MyResult {
         val result = MyResult()
@@ -26,6 +30,7 @@ class ClearService {
     fun clearAll(): MyResult {
         val result = MyResult()
         teamRepository.clearAllTeam()
+        heroRepository.clearAllHero()
         result.data = "清除全部队伍成功"
         return result
     }
