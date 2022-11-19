@@ -3,6 +3,7 @@ package com.weiran.lottery.service
 import com.weiran.lottery.common.LogResponse
 import com.weiran.lottery.common.MyResult
 import com.weiran.lottery.common.PostParam
+import com.weiran.lottery.entity.Hero
 import com.weiran.lottery.entity.Log
 import com.weiran.lottery.entity.Team
 import com.weiran.lottery.mapper.HeroRepository
@@ -84,16 +85,27 @@ class PickService {
     }
 
     private fun heroPick(): String {
-        var heroGroupName = ""
-        (1..5).shuffled().take(2).forEach {
-            val heroes = heroRepository.getHeroesByRule(it)
-            heroes.shuffled().take(1).forEach { hero ->
-                heroGroupName += "[" + hero.name + "]"
-                hero.isPick = true
-                heroRepository.save(hero)
-            }
+        return getSecondRandomHero(getFirstRandomHero())
+    }
+
+    private fun getFirstRandomHero(): Hero {
+        val hero = heroRepository.getHeroesNotIsPick()[0]
+        saveHeroAndIsPick(hero)
+        return hero
+    }
+
+    private fun getSecondRandomHero(existHero: Hero): String {
+        var hero = heroRepository.getHeroesNotIsPick()[0]
+        while (existHero.line == hero.line) {
+            hero = heroRepository.getHeroesNotIsPick()[0]
         }
-        return heroGroupName
+        saveHeroAndIsPick(hero)
+        return "[${existHero.name}][${hero.name}]"
+    }
+
+    private fun saveHeroAndIsPick(hero: Hero) {
+        hero.isPick = true
+        heroRepository.save(hero)
     }
 
 }
