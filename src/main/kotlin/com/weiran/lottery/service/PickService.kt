@@ -7,13 +7,11 @@ import com.weiran.lottery.entity.Team
 import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.LogRepository
 import com.weiran.lottery.mapper.TeamRepository
-import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-@RequiredArgsConstructor
 class PickService {
 
     @Autowired

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface HeroRepository : JpaRepository<Hero, Int> {
-    @Query("select h FROM Hero h where h.line = ?1 and h.isPick = false ")
+    @Query("SELECT h FROM Hero h WHERE h.line = ?1 AND h.isPick = FALSE ")
     fun getHeroesByRule(line: Int): List<Hero>
 
 }
