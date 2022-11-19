@@ -13,15 +13,19 @@ class ClearController {
     @Autowired
     private lateinit var clearService: ClearService
 
-
-    @GetMapping("/clear")
+    @GetMapping("/refresh")
     fun clearTeam(@RequestParam id: Int): MyResult {
-        return clearService.clearOne(id)
+        return clearService.refreshOneTeam(id)
     }
 
-    @GetMapping("/clear/all")
+    @GetMapping("/refresh/team")
     fun clearAllTeam(): MyResult {
-        return clearService.clearAll()
+        return clearService.refreshAllTeam()
+    }
+
+    @GetMapping("/refresh/hero")
+    fun clearAllHero(): MyResult {
+        return clearService.refreshAllHero()
     }
 
 }
