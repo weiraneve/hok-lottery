@@ -12,7 +12,7 @@ pipeline
     {
       steps {
          sh" kill -9 \$(lsof -i:8034) "
-         sh" JENKINS_NODE_COOKIE=dontKillMe nohup java -jar /root/.jenkins/workspace/hok-lottery/build/libs/hok-lottery-1.0.5.jar > /root/.jenkins/workspace/hok-lottery/hok-lottery.out 2>&1 & "
+         sh" JENKINS_NODE_COOKIE=dontKillMe nohup java -jar /root/.jenkins/workspace/hok-lottery/build/libs/hok-lottery-1.0.6.jar > /root/.jenkins/workspace/hok-lottery/hok-lottery.out 2>&1 & "
       }
     }
   }
