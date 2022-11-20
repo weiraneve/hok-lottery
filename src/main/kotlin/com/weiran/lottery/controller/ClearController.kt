@@ -13,17 +13,17 @@ class ClearController {
     @Autowired
     private lateinit var clearService: ClearService
 
-    @GetMapping("/refresh")
+    @GetMapping(value = ["/refresh"], produces = ["application/json; charset=utf-8"])
     fun clearTeam(@RequestParam id: Int): MyResult {
         return clearService.refreshOneTeam(id)
     }
 
-    @GetMapping("/refresh/team")
+    @GetMapping(value = ["/refresh/team"], produces = ["application/json; charset=utf-8"])
     fun clearAllTeam(): MyResult {
         return clearService.refreshAllTeam()
     }
 
-    @GetMapping("/refresh/hero")
+    @GetMapping(value = ["/refresh/hero"], produces = ["application/json; charset=utf-8"])
     fun clearAllHero(): MyResult {
         return clearService.refreshAllHero()
     }
