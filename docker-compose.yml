@@ -7,10 +7,10 @@ services:
     ports:
       - "8034:8034"
     environment:
-      DOCKER_HOST: 172.18.0.3
+      DOCKER_HOST: 172.20.0.3
     networks:
       myapp_net:
-        ipv4_address: 172.18.0.2
+        ipv4_address: 172.20.0.2
     depends_on: 
       - mydb
     restart: always
@@ -27,7 +27,7 @@ services:
       TZ: Asia/Shanghai
     networks:
       myapp_net:
-        ipv4_address: 172.18.0.3
+        ipv4_address: 172.20.0.3
     restart: always
 
 networks:
