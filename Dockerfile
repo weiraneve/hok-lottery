@@ -8,5 +8,3 @@ ENV LANG=en_US.UTF8
 ENV TZ=Asia/Shanghai
 
 EXPOSE 8034
-
-CMD ["java", "-jar", "/app/hok-lottery-1.0.6.jar"]
