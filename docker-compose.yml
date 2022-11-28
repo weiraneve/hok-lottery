@@ -19,7 +19,7 @@ services:
     entrypoint: java -jar /app/hok-lottery-1.0.6.jar
 
   mydb:
-    image: mysql:5.7.5
+    image: mysql:8.0
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
