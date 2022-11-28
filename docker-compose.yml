@@ -1,22 +1,21 @@
-version: "3"
+version: "3.9"
 
 services:
   myapp:
     build: ./
-    image: hok-lottery
+    image: hok-lottery:1.0.6
     ports:
       - "8034:8034"
     volumes:
       - app-data:/app
     environment:
-      DOCKER_HOST: 172.20.0.3
-    networks:
-      myapp_net:
-        ipv4_address: 172.20.0.2
+      DOCKER_HOST: database
+    links:
+      - "mydb:database"
     depends_on:
       - mydb
     restart: always
-    entrypoint: java -jar /app/hok-lottery-1.0.6.jar
+    entrypoint: java -jar /app/hok-lottery.jar
 
   mydb:
     image: mysql:8.0
@@ -28,15 +27,7 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: lottery
       TZ: Asia/Shanghai
-    networks:
-      myapp_net:
-        ipv4_address: 172.20.0.3
     restart: always
-
-networks:
-  myapp_net:
-    external:
-      name: app-network
 
 volumes:
   app-data:
