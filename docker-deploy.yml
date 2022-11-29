@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  myapp:
+    build: ./
+    image: hok-lottery:1.0.6
+    ports:
+      - "8034:8034"
+    environment:
+      DOCKER_HOST: database
+    links:
+      - "mydb:database"
+    depends_on:
+      - mydb
+    restart: always
+    entrypoint: java -jar /app/hok-lottery.jar
+    deploy:
+      mode: replicated
+      replicas: 3
+
+  mydb:
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3305:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: lottery
+      TZ: Asia/Shanghai
+    restart: always
+    deploy:
+      placement:
+        constraints: [ node.role == manager ]
+
+volumes:
+  mysql-data:
+  visualizer-data:
