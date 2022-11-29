@@ -6,8 +6,6 @@ services:
     image: hok-lottery:1.0.6
     ports:
       - "8034:8034"
-    volumes:
-      - app-data:/app
     environment:
       DOCKER_HOST: database
     links:
@@ -30,5 +28,4 @@ services:
     restart: always
 
 volumes:
-  app-data:
   mysql-data:
