@@ -11,7 +11,7 @@ pipeline
       stage('Deploy')
     {
       steps {
-         sh" docker-compose up --build -d "
+         sh" docker-compose up --no-deps --build -d myapp "
       }
     }
   }
