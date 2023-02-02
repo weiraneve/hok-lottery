@@ -9,27 +9,21 @@ import com.weiran.lottery.entity.Team
 import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.LogRepository
 import com.weiran.lottery.mapper.TeamRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class PickService {
-
-    @Autowired
-    private lateinit var heroRepository: HeroRepository
-
-    @Autowired
-    private lateinit var logRepository: LogRepository
-
-    @Autowired
-    private lateinit var teamRepository: TeamRepository
+class PickService(
+    val heroRepository: HeroRepository,
+    val logRepository: LogRepository,
+    val teamRepository: TeamRepository
+) {
 
     fun pick(param: PostParam): MyResult {
         val team = param.encryptCode?.let { teamRepository.findByEncryptCode(it) }
         val result = MyResult()
         val logResponseList = arrayListOf<LogResponse>()
-        if (team != null) {
+        team?.run {
             if (team.isPicked) {
                 result.data = team.pickContent
             } else {
@@ -41,7 +35,7 @@ class PickService {
             }
             team.id?.let {
                 val logs = logRepository.findByTeamId(it)
-                if (logs != null) {
+                logs?.run {
                     for (log in logs) {
                         val logResponse = LogResponse()
                         logResponse.apply {
@@ -73,11 +67,11 @@ class PickService {
         teamRepository.save(team)
     }
 
-    private fun saveResultForLog(team_id: Int?, pickResult: String) {
+    private fun saveResultForLog(teamIndex: Int?, pickResult: String) {
         val log = Log()
         val date = Date()
         log.apply {
-            teamId = team_id
+            teamId = teamIndex
             pickGroup = pickResult
             time = date
         }
@@ -95,10 +89,7 @@ class PickService {
     }
 
     private fun getSecondRandomHero(existHero: Hero): String {
-        var hero = heroRepository.getHeroesNotIsPick()[0]
-        while (existHero.line == hero.line) {
-            hero = heroRepository.getHeroesNotIsPick()[0]
-        }
+        val hero = heroRepository.getHeroesNotIsPick()[0]
         saveHeroAndIsPick(hero)
         return "[${existHero.name}][${hero.name}]"
     }

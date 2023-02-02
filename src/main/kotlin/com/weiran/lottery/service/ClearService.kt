@@ -3,17 +3,13 @@ package com.weiran.lottery.service
 import com.weiran.lottery.common.MyResult
 import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.TeamRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class ClearService {
-
-    @Autowired
-    private lateinit var teamRepository: TeamRepository
-
-    @Autowired
-    private lateinit var heroRepository: HeroRepository
+class ClearService(
+    val teamRepository: TeamRepository,
+    val heroRepository: HeroRepository
+) {
 
     fun refreshOneTeam(teamId: Int): MyResult {
         val result = MyResult()
