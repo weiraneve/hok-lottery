@@ -22,40 +22,39 @@ class PickService(
     fun pick(param: PostParam): MyResult {
         val team = param.encryptCode?.let { teamRepository.findByEncryptCode(it) }
         val result = MyResult()
-        val logResponseList = arrayListOf<LogResponse>()
-        team?.run {
-            if (team.isPicked) {
-                result.data = team.pickContent
-            } else {
-                var pickResult = heroPick()
-                pickResult += "or" + heroPick()
-                result.data = pickResult
-                saveResultForLog(team.id, pickResult)
-                updateTeamIsPicked(team, pickResult)
-            }
-            team.id?.let {
-                val logs = logRepository.findByTeamId(it)
-                logs?.run {
-                    for (log in logs) {
-                        val logResponse = LogResponse()
-                        logResponse.apply {
-                            teamId = log.teamId
-                            pickGroup = log.pickGroup
-                            time = log.time
-                        }
-                        logResponseList.add(logResponse)
-                    }
-                }
-            }
+        var logResponses: List<LogResponse> = listOf()
+        team?.let {
+            checkTeamIsPicked(it, result)
+            logResponses = getLogs(it.id!!)
         }
-
         result.apply {
             teamId = team?.id
             time = team?.updateTime ?: Date()
-            logs = logResponseList
+            logs = logResponses
         }
-
         return result
+    }
+
+    private fun getLogs(teamId: Int): List<LogResponse> {
+        val logs = logRepository.findByTeamId(teamId)
+        return logs.map { log ->
+            LogResponse(
+                teamId = log.teamId,
+                pickGroup = log.pickGroup,
+                time = log.time
+            )
+        }
+    }
+
+    private fun checkTeamIsPicked(team: Team, result: MyResult) {
+        if (team.isPicked) {
+            result.data = team.pickContent
+        } else {
+            val pickResult = heroPick() + "or" + heroPick()
+            result.data = pickResult
+            saveResultForLog(team.id, pickResult)
+            updateTeamIsPicked(team, pickResult)
+        }
     }
 
     private fun updateTeamIsPicked(team: Team, pickResult: String) {
@@ -68,12 +67,10 @@ class PickService(
     }
 
     private fun saveResultForLog(teamIndex: Int?, pickResult: String) {
-        val log = Log()
-        val date = Date()
-        log.apply {
+        val log = Log().apply {
             teamId = teamIndex
             pickGroup = pickResult
-            time = date
+            time = Date()
         }
         logRepository.save(log)
     }

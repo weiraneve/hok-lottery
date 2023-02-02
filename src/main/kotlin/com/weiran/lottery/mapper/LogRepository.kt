@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository
 interface LogRepository : JpaRepository<Log, Int> {
 
     @Query("SELECT * FROM log l WHERE l.team_id = ?1 ORDER BY l.time DESC ", nativeQuery=true)
-    fun findByTeamId(teamId: Int): List<Log>?
+    fun findByTeamId(teamId: Int): List<Log>
 
 }
