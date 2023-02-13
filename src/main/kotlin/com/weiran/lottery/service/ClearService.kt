@@ -5,13 +5,20 @@ import com.weiran.lottery.mapper.HeroRepository
 import com.weiran.lottery.mapper.TeamRepository
 import org.springframework.stereotype.Service
 
+interface ClearService {
+    fun refreshOneTeam(teamId: Int): MyResult
+    fun refreshAllTeam(): MyResult
+    fun refreshAllHero(): MyResult
+
+}
+
 @Service
-class ClearService(
+class ClearServiceImpl(
     val teamRepository: TeamRepository,
     val heroRepository: HeroRepository
-) {
+) : ClearService {
 
-    fun refreshOneTeam(teamId: Int): MyResult {
+    override fun refreshOneTeam(teamId: Int): MyResult {
         val result = MyResult()
         if (teamRepository.findById(teamId).isEmpty) {
             result.data = NOT_FOUND_TEAM
@@ -23,7 +30,7 @@ class ClearService(
         return result
     }
 
-    fun refreshAllTeam(): MyResult {
+    override fun refreshAllTeam(): MyResult {
         val result = MyResult()
         teamRepository.clearAllTeam()
         heroRepository.clearAllHero()
@@ -31,7 +38,7 @@ class ClearService(
         return result
     }
 
-    fun refreshAllHero(): MyResult {
+    override fun refreshAllHero(): MyResult {
         val result = MyResult()
         heroRepository.clearAllHero()
         result.data = REFRESH_ALL_HERO_SUCCESS

@@ -12,14 +12,19 @@ import com.weiran.lottery.mapper.TeamRepository
 import org.springframework.stereotype.Service
 import java.util.*
 
+
+interface PickService {
+    fun pick(param: PostParam): MyResult
+}
+
 @Service
-class PickService(
+class PickServiceImpl(
     val heroRepository: HeroRepository,
     val logRepository: LogRepository,
     val teamRepository: TeamRepository
-) {
+) : PickService {
 
-    fun pick(param: PostParam): MyResult {
+    override fun pick(param: PostParam): MyResult {
         val team = param.encryptCode?.let { teamRepository.findByEncryptCode(it) }
         val result = MyResult()
         var logResponses: List<LogResponse> = listOf()
