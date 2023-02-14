@@ -4,19 +4,18 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "hero")
-class Hero {
+data class Hero(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Int? = null,
 
     @Column(name = "name")
-    var name: String = ""
+    var name: String = "",
 
     @Column(name = "line")
-    var line: Int? = null
+    var line: Int? = null,
 
     @Column(name = "is_pick")
     var isPick: Boolean = false
-
-}
+)

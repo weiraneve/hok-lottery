@@ -72,11 +72,11 @@ class PickServiceImpl(
     }
 
     private fun saveResultForLog(teamIndex: Int?, pickResult: String) {
-        val log = Log().apply {
-            teamId = teamIndex
-            pickGroup = pickResult
+        val log = Log(
+            teamId = teamIndex,
+            pickGroup = pickResult,
             time = Date()
-        }
+        )
         logRepository.save(log)
     }
 

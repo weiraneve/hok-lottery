@@ -5,19 +5,19 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "log")
-class Log {
+data class Log(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Int? = null,
 
     @Column(name = "team_id")
-    var teamId: Int? = null
+    var teamId: Int? = null,
 
     @Column(name = "pick_group")
-    var pickGroup: String = ""
+    var pickGroup: String = "",
 
     @Column(name = "time")
-    lateinit var time: Date
+    var time: Date = Date()
 
-}
+)
