@@ -3,7 +3,8 @@
 
 使用`kotlin` 语言和`springboot`框架来构建的后端。
 
-[前端部分在这](https://github.com/weiran1999/hok-front)
+- [Web前端](https://github.com/weiran1999/hok-front)
+- [Android移动端](https://github.com/weiran1999/android-hok-lottery)
 
 # 介绍
 
