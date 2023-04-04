@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 class PickController(val pickService: PickService) {
 
     @PostMapping
-    fun postToPickHeroes(@RequestBody param: PostParam): MyResult {
+    fun pickHeroes(@RequestBody param: PostParam): MyResult {
         return pickService.pick(param)
     }
 
