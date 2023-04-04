@@ -1,8 +1,8 @@
 package com.weiran.lottery.service
 
 import com.weiran.lottery.common.MyResult
-import com.weiran.lottery.mapper.HeroRepository
-import com.weiran.lottery.mapper.TeamRepository
+import com.weiran.lottery.repository.HeroRepository
+import com.weiran.lottery.repository.TeamRepository
 import org.springframework.stereotype.Service
 
 interface ClearService {

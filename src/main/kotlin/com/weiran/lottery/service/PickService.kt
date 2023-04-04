@@ -6,9 +6,9 @@ import com.weiran.lottery.common.PostParam
 import com.weiran.lottery.entity.Hero
 import com.weiran.lottery.entity.Log
 import com.weiran.lottery.entity.Team
-import com.weiran.lottery.mapper.HeroRepository
-import com.weiran.lottery.mapper.LogRepository
-import com.weiran.lottery.mapper.TeamRepository
+import com.weiran.lottery.repository.HeroRepository
+import com.weiran.lottery.repository.LogRepository
+import com.weiran.lottery.repository.TeamRepository
 import org.springframework.stereotype.Service
 import java.util.*
 

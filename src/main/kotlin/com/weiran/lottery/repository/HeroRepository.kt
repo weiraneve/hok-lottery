@@ -1,4 +1,4 @@
-package com.weiran.lottery.mapper
+package com.weiran.lottery.repository
 
 import com.weiran.lottery.entity.Hero
 import org.springframework.data.jpa.repository.JpaRepository
