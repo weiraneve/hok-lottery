@@ -3,3 +3,6 @@
 - [Web前端](https://github.com/weiran1999/hok-front)
 - [Android移动端](https://github.com/weiran1999/hok-lottery-android)
 - [ios移动端](https://github.com/weiran1999/hok-lottery-ios)
+
+## apis
+See [the API documentation pages](./apis) for more info.
