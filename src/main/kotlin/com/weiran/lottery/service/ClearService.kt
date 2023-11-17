@@ -6,9 +6,9 @@ import com.weiran.lottery.repository.TeamRepository
 import org.springframework.stereotype.Service
 
 interface ClearService {
-    fun refreshOneTeam(teamId: Int): MyResult
-    fun refreshAllTeam(): MyResult
-    fun refreshAllHero(): MyResult
+    fun clearOneTeam(teamId: Int): MyResult
+    fun clearAllTeam(): MyResult
+    fun clearAllHero(): MyResult
 
 }
 
@@ -18,7 +18,7 @@ class ClearServiceImpl(
     val heroRepository: HeroRepository
 ) : ClearService {
 
-    override fun refreshOneTeam(teamId: Int): MyResult {
+    override fun clearOneTeam(teamId: Int): MyResult {
         val result = MyResult()
         if (teamRepository.findById(teamId).isEmpty) {
             result.data = NOT_FOUND_TEAM
@@ -30,25 +30,25 @@ class ClearServiceImpl(
         return result
     }
 
-    override fun refreshAllTeam(): MyResult {
+    override fun clearAllTeam(): MyResult {
         val result = MyResult()
         teamRepository.clearAllTeam()
         heroRepository.clearAllHero()
-        result.data = REFRESH_ALL_TEAM_SUCCESS
+        result.data = CLEAR_ALL_TEAM_SUCCESS
         return result
     }
 
-    override fun refreshAllHero(): MyResult {
+    override fun clearAllHero(): MyResult {
         val result = MyResult()
         heroRepository.clearAllHero()
-        result.data = REFRESH_ALL_HERO_SUCCESS
+        result.data = CLEAR_ALL_HERO_SUCCESS
         return result
     }
 
     companion object {
         private const val NOT_FOUND_TEAM = "未有查询到此队伍"
-        private const val REFRESH_ALL_TEAM_SUCCESS = "刷新全部队伍成功"
-        private const val REFRESH_ALL_HERO_SUCCESS = "刷新全部英雄成功"
+        private const val CLEAR_ALL_TEAM_SUCCESS = "重置所有队伍成功"
+        private const val CLEAR_ALL_HERO_SUCCESS = "重置所有英雄成功"
     }
 
 }

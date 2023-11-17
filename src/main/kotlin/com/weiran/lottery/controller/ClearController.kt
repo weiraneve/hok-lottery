@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController
 class ClearController(val clearService: ClearService) {
 
 
-    @GetMapping(value = ["/refresh"], produces = ["application/json; charset=utf-8"])
+    @GetMapping(value = ["/clear"], produces = ["application/json; charset=utf-8"])
     fun clearTeam(@RequestParam id: Int): MyResult {
-        return clearService.refreshOneTeam(id)
+        return clearService.clearOneTeam(id)
     }
 
-    @GetMapping(value = ["/refresh/team"], produces = ["application/json; charset=utf-8"])
+    @GetMapping(value = ["/clear/team"], produces = ["application/json; charset=utf-8"])
     fun clearAllTeam(): MyResult {
-        return clearService.refreshAllTeam()
+        return clearService.clearAllTeam()
     }
 
-    @GetMapping(value = ["/refresh/hero"], produces = ["application/json; charset=utf-8"])
+    @GetMapping(value = ["/clear/hero"], produces = ["application/json; charset=utf-8"])
     fun clearAllHero(): MyResult {
-        return clearService.refreshAllHero()
+        return clearService.clearAllHero()
     }
 
 }
