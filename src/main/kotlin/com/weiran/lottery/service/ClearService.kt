@@ -26,7 +26,6 @@ class ClearServiceImpl(
             teamRepository.clearOneTeam(teamId)
             result.data = "刷新队伍${teamId}成功"
         }
-        teamRepository.clearOneTeam(teamId)
         return result
     }
 
