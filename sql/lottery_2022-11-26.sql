@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `hero`, `team`, `log`;
 CREATE TABLE `hero` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '英雄名',
-  `line` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT '英雄分路',
+  `line` int NOT NULL COMMENT '英雄分路',
   `is_pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被选择',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
