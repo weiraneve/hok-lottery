@@ -10,8 +10,8 @@ import javax.transaction.Transactional
 @Repository
 interface HeroRepository : JpaRepository<Hero, Int> {
 
-    @Query("SELECT * FROM hero h WHERE h.is_pick = FALSE ORDER BY RAND() LIMIT 1", nativeQuery=true)
-    fun getHeroesNotIsPick(): List<Hero>
+    @Query("SELECT * FROM hero h WHERE h.is_pick = FALSE ORDER BY RAND() LIMIT 4", nativeQuery = true)
+    fun getHeroesNotIsPick(): List<Hero?>
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional

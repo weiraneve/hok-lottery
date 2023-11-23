@@ -55,10 +55,31 @@ class PickServiceImpl(
         if (team.isPicked) {
             result.data = team.pickContent
         } else {
-            val pickResult = heroPick() + "or" + heroPick()
+            val pickHeroes = heroRepository.getHeroesNotIsPick()
+            val pickResult = getPickResult(pickHeroes)
             result.data = pickResult
             saveResultForLog(team.id, pickResult)
             updateTeamIsPicked(team, pickResult)
+        }
+    }
+
+    private fun getPickResult(pickHeroes: List<Hero?>): String {
+        return if (pickHeroes.size == HEROES_AMOUNT) {
+            savePickHeroes(pickHeroes)
+            val firstGroup = pickHeroes.take(HEROES_AMOUNT / 2).joinToString("、") { it?.name ?: "" }
+            val secondGroup = pickHeroes.takeLast(HEROES_AMOUNT / 2).joinToString("、") { it?.name ?: "" }
+            "[$firstGroup] or [$secondGroup]"
+        } else {
+            HEROES_NEED_RESET
+        }
+    }
+
+    private fun savePickHeroes(pickHeroes: List<Hero?>) {
+        pickHeroes.forEach {
+            it?.let {
+                it.isPick = true
+                heroRepository.save(it)
+            }
         }
     }
 
@@ -80,25 +101,9 @@ class PickServiceImpl(
         logRepository.save(log)
     }
 
-    private fun heroPick(): String {
-        return getSecondRandomHero(getFirstRandomHero())
-    }
-
-    private fun getFirstRandomHero(): Hero {
-        val hero = heroRepository.getHeroesNotIsPick()[0]
-        saveHeroAndIsPick(hero)
-        return hero
-    }
-
-    private fun getSecondRandomHero(existHero: Hero): String {
-        val hero = heroRepository.getHeroesNotIsPick()[0]
-        saveHeroAndIsPick(hero)
-        return "[${existHero.name}][${hero.name}]"
-    }
-
-    private fun saveHeroAndIsPick(hero: Hero) {
-        hero.isPick = true
-        heroRepository.save(hero)
+    companion object {
+        private const val HEROES_AMOUNT = 4
+        private const val HEROES_NEED_RESET = "英雄需要刷新"
     }
 
 }
