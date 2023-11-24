@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 class ResetController(val resetService: ResetService) {
 
 
-    @GetMapping(value = ["/reset"], produces = ["application/json; charset=utf-8"])
+    @GetMapping(value = ["/reset/team"], produces = ["application/json; charset=utf-8"])
     fun resetTeam(@RequestParam id: Int): MyResult {
         return resetService.resetOneTeam(id)
     }
