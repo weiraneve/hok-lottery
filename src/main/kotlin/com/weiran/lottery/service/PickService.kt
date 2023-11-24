@@ -66,9 +66,9 @@ class PickServiceImpl(
     private fun getPickResult(pickHeroes: List<Hero?>): String {
         return if (pickHeroes.size == HEROES_AMOUNT) {
             savePickHeroes(pickHeroes)
-            val firstGroup = pickHeroes.take(HEROES_AMOUNT / 2).joinToString("、") { it?.name ?: "" }
-            val secondGroup = pickHeroes.takeLast(HEROES_AMOUNT / 2).joinToString("、") { it?.name ?: "" }
-            "[$firstGroup] or [$secondGroup]"
+            val firstGroup = pickHeroes.take(HEROES_AMOUNT / 2).joinToString(",") { it?.name ?: "" }
+            val secondGroup = pickHeroes.takeLast(HEROES_AMOUNT / 2).joinToString(",") { it?.name ?: "" }
+            "[$firstGroup]or[$secondGroup]"
         } else {
             HEROES_NEED_RESET
         }
