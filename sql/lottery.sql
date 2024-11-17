@@ -6,7 +6,7 @@ CREATE TABLE `hero` (
   `line` int NOT NULL COMMENT '英雄分路',
   `is_pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被选择',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `hero` (`id`, `name`, `line`, `is_pick`)
 VALUES
@@ -21,6 +21,7 @@ VALUES
 	(9,'八戒','1',0),
 	(10,'白起','1',0),
 	(11,'司空震','1',0),
+	(12,'司命','1',0),
 	(13,'苏烈','1',0),
 	(14,'杨玉环','2',0),
 	(15,'嫦娥','2',0),
@@ -59,7 +60,7 @@ CREATE TABLE `log` (
   `pick_group` varchar(100) CHARACTER SET utf8mb4  NOT NULL COMMENT '抽取组合',
   `time` datetime NOT NULL COMMENT '记录时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `team` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -68,7 +69,7 @@ CREATE TABLE `team` (
   `is_picked` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否抽取过',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 INSERT INTO `team` (`id`, `encrypt_code`, `pick_content`, `is_picked`, `update_time`)
